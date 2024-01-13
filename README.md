@@ -2,8 +2,7 @@
 ## Run User Project Memory Enabled counter_la Testbench
 Run iverilog simulation
 ```sh
-~/Desktop/soclab-sdram/testbench/counter_la_mm$
-source run_clean
+cd ~/caravel-soc_fpga-lab/lab-sdram/testbench/counter_la
 source run_sim
 ```
 
@@ -14,8 +13,6 @@ counter_la.hex loaded into memory
 Memory 5 bytes = 0x6f 0x00 0x00 0x0b 0x13
 VCD info: dumpfile counter_la.vcd opened for output.
 LA Test 1 started
-counter_la_mm_tb.uut.mprj.mprj.user_bram : at time           4896263000 ERROR: Bank is not Activated for Read
 Call function adder() in User Project BRAM (mprjram, 0x38000000) return value passed, 0x2233
 LA Test 2 passed
 ```
-
