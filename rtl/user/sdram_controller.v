@@ -132,20 +132,18 @@ module sdram_controller (
     reg[22:0] prefetch_address; 
     reg prefetch;
     integer i;
-///////////////set prefetch condition
-    always@(posedge clk)begin     
-    	if(in_valid)
-    		prefetch_address <= addr + 22'd4;     
-   	 else if(!in_valid && out_valid_q)
-    		prefetch_address <= 0;
-    	
-   	 if((prefetch_address == addr) && in_valid && !rw)
-    		prefetch <= 1;
-  	 else if((prefetch_address != addr) && in_valid & !rw)
-    		prefetch <= 0;
-   	 else if(rw)
-    		prefetch <= 0;
-    end	
+/////////////// prefetch //////////////////
+always @(posedge clk) begin
+    if (in_valid) begin
+        prefetch_address <= addr + 22'd4;
+        prefetch <= (prefetch_address == addr) && !rw;
+    end else if (!in_valid && out_valid_q) begin
+        prefetch_address <= 0;
+        prefetch <= 0;
+    end else begin
+        prefetch <= 0;
+    end
+end
 
     assign data_out = data_q;
     assign busy = !ready_q;
